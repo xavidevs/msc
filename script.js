@@ -1,8 +1,8 @@
 // Define the list of websites to redirect to
 const websites = [
-    'https://example1.com',
-    'https://example2.com',
-    'https://example3.com'
+    'https://sococycleri.com',
+    'https://woodknocker.co',
+    'https://amazon.com'
 ];
 
 // Redirect to a random website from the list
