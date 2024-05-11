@@ -1,0 +1,12 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+#redirect-container {
+    text-align: center;
+    margin-top: 100px;
+}
+
+#redirect-message {
+    font-size: 20px;
+}
