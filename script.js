@@ -9,8 +9,8 @@ const websites = [
   // Function to shuffle the websites
   function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
     }
   }
   
@@ -25,15 +25,12 @@ const websites = [
   // Function to retrieve the selected website from Firebase
   function retrieveSelectedWebsite() {
     firebase.database().ref('selectedWebsite').once('value').then(function(snapshot) {
-      const selectedWebsite = snapshot.val();
-      if (selectedWebsite) {
-        window.location.href = selectedWebsite; // Redirect to the selected website
-      } else {
-        redirectToRandomWebsite(); // If no website is selected yet, select and redirect to a random one
-      }
-    }).catch(function(error) {
-      console.error('Error retrieving selected website:', error);
-      redirectToRandomWebsite(); // If there's an error, select and redirect to a random website
+        const selectedWebsite = snapshot.val();
+        if (selectedWebsite) {
+            window.location.href = selectedWebsite; // Redirect to the selected website
+        } else {
+            redirectToRandomWebsite(); // If no website is selected yet, select and redirect to a random one
+        }
     });
   }
   
@@ -41,12 +38,12 @@ const websites = [
   function timeUntilMidnight() {
     const now = new Date();
     const midnight = new Date(
-      now.getFullYear(),
-      now.getMonth(),
-      now.getDate(), // Current day
-      24, // Midnight hour (24-hour format)
-      0, // Midnight minute
-      0 // Midnight second
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate(), // Current day
+        24,           // Midnight hour (24-hour format)
+        0,            // Midnight minute
+        0             // Midnight second
     );
     const timeUntilMidnight = midnight - now;
     return timeUntilMidnight;
@@ -55,15 +52,11 @@ const websites = [
   // Function to update the websites at midnight (local time zone)
   function updateWebsitesAtMidnight() {
     shuffle(websites);
-    firebase.database().ref('selectedWebsite').remove(); // Clear the previously selected website
-    redirectToRandomWebsite(); // Select and redirect to a new random website
     const timeUntilNextMidnight = timeUntilMidnight();
     setTimeout(updateWebsitesAtMidnight, timeUntilNextMidnight);
   }
   
   // Initial setup: shuffle websites, schedule the next update at midnight, and retrieve/redirect to the selected website
-  shuffle(websites);
-  updateWebsitesAtMidnight();
   retrieveSelectedWebsite();
   
   // Redirect after 5 seconds (5000 milliseconds)
